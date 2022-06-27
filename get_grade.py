@@ -1,14 +1,15 @@
 import requests
 import time
 from numpy import transpose
-from view import Histogram
+import view
+
 
 def get_num(school_id):
     header = {
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 "
                       "Safari/537.36 Edg/101.0.1210.39 "
     }
-    dt = {2: "文科", 1: "理科"}
+    dt = {1: "理科"}
 
     for j in dt.keys():
         date = []
@@ -16,27 +17,20 @@ def get_num(school_id):
             url = "https://static-data.gaokao.cn/www/2.0/schoolprovinceindex/{}/{}/14/{}/1.json".format(i, school_id, j)
             txt = requests.get(url=url, headers=header, ).json()
             item = txt['data']["item"]
-            print(item[0]["year"], dt[j])
-            dict={
-                "本科一批A段":0,
+            # print(item[0]["year"], dt[j])
+            dict = {
+                "本科一批A段": 0,
                 "本科一批B段": 0,
                 "本科二批A段": 0,
                 "本科二批B段": 0,
             }
             for one in item:
-                dict[one["local_batch_name"]]=one["min"]
+                dict[one["local_batch_name"]] = int(one["min"])
 
             date.append(list(dict.values()))
             time.sleep(0.5)
         transposed = transpose(date).tolist()
-        Histogram(transposed)
-
-
-
-
-
-
-
+        view.Histogram(transposed)
 
 
 if __name__ == '__main__':
