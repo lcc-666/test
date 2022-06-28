@@ -1,7 +1,8 @@
 import requests
 import time
-from numpy import transpose
+from numpy import transpose, VisibleDeprecationWarning
 import view
+import numpy as np
 
 
 def get_num(school_id, j):
@@ -24,13 +25,19 @@ def get_num(school_id, j):
             "本科二批B段": 0,
         }
         for one in item:
-            print(one["local_batch_name"],int(one["min"]))
+            print(one["local_batch_name"], int(one["min"]))
             item_dict[one["local_batch_name"]] = int(one["min"])
 
         date.append(list(item_dict.values()))
         time.sleep(0.5)
-    transposed = transpose(date).tolist()
-    view.Histogram(transposed)
+    np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning)
+
+    try:
+        transposed = transpose(date).tolist()
+        view.Histogram(transposed)
+    except IndexError:
+        pass
+
 
 
 if __name__ == '__main__':
