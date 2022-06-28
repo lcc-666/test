@@ -24,8 +24,11 @@ if __name__ == '__main__':
             exit()
         if word in school_dt.keys():
             school_id = eval(school_dt[word])
-        if word in school_dt.values():
+        elif word in school_dt.values():
             school_id = word
+        else:
+            print("输入格式错误请重新输入")
+            continue
         print("请选择文理")
         print({1: "理科", 2: "文科"})
         project_type = input()
