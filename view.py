@@ -20,7 +20,7 @@ def Histogram(grade_data):
     rects3 = ax.bar(x + width * 0.5, c, width, label='本科二批A段')
     rects4 = ax.bar(x + width * 1.5, d, width, label='本科二批B段')
 
-    plt.yticks([400, 450, 500, 550, 600, 650, 700])
+    plt.yticks([20000, 30000, 40000, 50000, 60000, 70000, 80000])
     ax.set_xticks(x)
     ax.set_xticklabels(labels)
 
@@ -41,7 +41,7 @@ def Histogram(grade_data):
     autolabel(rects4)
 
     # Add some text for labels, title and custom x-axis tick labels, etc.
-    ax.set_ylabel('最低录取分数')
+    ax.set_ylabel('最低录取位次')
     ax.set_title('2019到2021年最低录取分数线')
     ax.set_xticks(x)
     ax.set_xticklabels(labels)
