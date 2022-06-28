@@ -25,8 +25,9 @@ def get_num(school_id, j):
             "本科二批B段": 0,
         }
         for one in item:
-            print(one["local_batch_name"], int(one["min"]))
-            item_dict[one["local_batch_name"]] = int(one["min"])
+
+            print("{} 最低分{} 最低名次{}".format(one["local_batch_name"], int(one["min"]),one['min_section']))
+            item_dict[one["local_batch_name"]] = int(one["min_section"])
 
         date.append(list(item_dict.values()))
         time.sleep(0.5)
