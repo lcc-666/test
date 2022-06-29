@@ -1,5 +1,7 @@
 import get_grade
 import down
+import get_major
+
 
 def get_school():
     dt = {}
@@ -17,15 +19,14 @@ def get_school_grade():
     school_dt = get_school()
     print("请在data.txt查询学校代码")
     while True:
-        school_id = ""
-        word = input("请输入规范的学校名称或者学校代码或者q\n")
-        if word is "q":
+        input_word = input("请输入规范的学校名称或者学校代码或者q\n")
+        if input_word is "q":
             print("退出查询学校历年分数")
             return
-        if word in school_dt.keys():
-            school_id = eval(school_dt[word])
-        elif word in school_dt.values():
-            school_id = word
+        if input_word in school_dt.keys():
+            school_id = eval(school_dt[input_word])
+        elif input_word in school_dt.values():
+            school_id = input_word
         else:
             print("输入格式错误请重新输入")
             continue
@@ -33,6 +34,8 @@ def get_school_grade():
         print({1: "理科", 2: "文科"})
         project_type = input()
         get_grade.get_num(school_id, project_type)
+        get_major.get_one_major(school_id, project_type)
+
 
 def get_down():
     down.dowb_num()
@@ -50,13 +53,14 @@ def get_down():
     down.calculation(info_dict)
     print("分析完成,请查看结果\n")
 
+
 if __name__ == '__main__':
     while True:
-        print("1.查询学校历年分数\n2.查询可报考学校\nq.退出程序")
-        word=input("请选择查询模式\n")
-        if word =="1":
+        print("1.查询学校历年批次以及专业分数\n2.查询可报考学校\nq.退出程序")
+        word = input("请选择查询模式\n")
+        if word == "1":
             get_school_grade()
-        elif word =="2":
+        elif word == "2":
             get_down()
         elif word is "q":
             print("感谢使用")
@@ -64,6 +68,3 @@ if __name__ == '__main__':
         else:
             print("输入错误请重新输入")
             continue
-
-
-
