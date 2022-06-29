@@ -1,4 +1,5 @@
 import requests
+import time
 """
 理科
 https://static-data.gaokao.cn/www/2.0/schoolspecialindex/2021/459/14/1/51/1.json（51）
@@ -38,6 +39,7 @@ def get_one_major(schiil_id, j):
                 rank = one["min_section"]
                 info = name + " " + rank + "\n"
                 f.write(info)
+        time.sleep(0.5)
     f.close()
     print("专业名次已生成")
 
