@@ -1,8 +1,5 @@
 import requests
 import time
-from numpy import transpose, VisibleDeprecationWarning
-import view
-import numpy as np
 
 
 def get_num(school_id, j):
@@ -16,6 +13,8 @@ def get_num(school_id, j):
     for i in range(2019, 2022):
         url = "https://static-data.gaokao.cn/www/2.0/schoolprovinceindex/{}/{}/14/{}/1.json".format(i, school_id, j)
         txt = requests.get(url=url, headers=header, ).json()
+        if txt is '':
+            continue
         item = txt['data']["item"]
         print(item[0]["year"], dt[int(j)])
         item_dict = {
@@ -25,20 +24,18 @@ def get_num(school_id, j):
             "本科二批B段": 0,
         }
         for one in item:
-
-            print("{} 最低分{} 最低名次{}".format(one["local_batch_name"], int(one["min"]),one['min_section']))
+            print("{} 最低分{} 最低名次{}".format(one["local_batch_name"], int(one["min"]), one['min_section']))
             item_dict[one["local_batch_name"]] = int(one["min_section"])
 
         date.append(list(item_dict.values()))
         time.sleep(0.5)
-    np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning)
-
-    try:
-        transposed = transpose(date).tolist()
-        view.Histogram(transposed)
-    except IndexError:
-        pass
-
+    # np.warnings.filterwarnings('ignore', category=np.VisibleDeprecationWarning)
+    #
+    # try:
+    #     transposed = transpose(date).tolist()
+    #     view.Histogram(transposed)
+    # except IndexError:
+    #     pass
 
 
 if __name__ == '__main__':
