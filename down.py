@@ -54,7 +54,7 @@ def calculation(detail: dict):
     cur.execute(sql)
     result = cur.fetchall()
     txtname=str(detail["num"])+str((hnum,lnum))+{1: "理科", 2: "文科"}[detail["pro"]]
-    f=open(file=txtname,mode="w",encoding="utf8")
+    f=open(file=txtname+".txt",mode="w",encoding="utf8")
     f.write("2021年分数{},最低名次{}\n".format(hnum,hrank.num))
     f.write("2021年分数{},最低名次{}\n".format(lnum, lrank.num))
     for one in result:
