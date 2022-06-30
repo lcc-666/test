@@ -1,5 +1,6 @@
 import requests
 import time
+
 """
 理科
 https://static-data.gaokao.cn/www/2.0/schoolspecialindex/2021/459/14/1/51/1.json（51）
@@ -12,6 +13,7 @@ https://static-data.gaokao.cn/www/2.0/schoolspecialindex/2021/269/14/2/51/1.json
 
 
 def get_one_major(schiil_id, j):
+    type_dt = {"1": "理科", "2": "文科"}
     dt = {
         "51": "1A",
         "52": "1B",
@@ -22,7 +24,7 @@ def get_one_major(schiil_id, j):
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 "
                       "Safari/537.36 Edg/101.0.1210.39 "
     }
-    f = open(file=str(schiil_id)+".txt", mode="w", encoding="utf8")
+    f = open(file=str(schiil_id) + type_dt[j] + ".txt", mode="w", encoding="utf8")
     for i in dt.keys():
         f.write(dt[i] + "\n")
         x = 0
