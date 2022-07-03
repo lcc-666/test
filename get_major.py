@@ -37,7 +37,7 @@ def get_one_major(schiil_id, j):
 
     school_dt=get_school()
     f = open(file=(school_dt[str(schiil_id)])+" " + type_dt[j] + ".txt", mode="w", encoding="utf8")
-    f.write("2021年专业录取最低位次")
+    f.write("2021年专业录取最低位次\n")
     for i in dt.keys():
         f.write(dt[i] + "\n")
         x = 0
