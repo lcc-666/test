@@ -1,6 +1,7 @@
 import get_grade
 import down
 import get_major
+import get_new_major
 
 
 def get_school():
@@ -35,6 +36,7 @@ def get_school_grade():
         project_type = input()
         get_grade.get_num(school_id, project_type)
         get_major.get_one_major(school_id, project_type)
+        get_new_major.get_new_major(school_id, project_type)
 
 
 def get_down():
