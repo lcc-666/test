@@ -11,6 +11,16 @@ https://static-data.gaokao.cn/www/2.0/schoolspecialindex/2021/269/14/2/51/1.json
 
 """
 
+def get_school():
+    dt = {}
+    f = open("data.txt", mode="r", encoding="utf8")
+    txt = f.readlines()
+    for i in txt:
+        item = i.strip()
+        key = item.split(":")[1]
+        value = item.split(":")[0]
+        dt[key] = value
+    return dt
 
 def get_one_major(schiil_id, j):
     type_dt = {"1": "理科", "2": "文科"}
@@ -24,7 +34,9 @@ def get_one_major(schiil_id, j):
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 "
                       "Safari/537.36 Edg/101.0.1210.39 "
     }
-    f = open(file=str(schiil_id) + type_dt[j] + ".txt", mode="w", encoding="utf8")
+
+    school_dt=get_school()
+    f = open(file=(school_dt[str(schiil_id)])+" " + type_dt[j] + ".txt", mode="w", encoding="utf8")
     for i in dt.keys():
         f.write(dt[i] + "\n")
         x = 0
